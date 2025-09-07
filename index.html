@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matt's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Kalam', cursive;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .profile-real {
+            background: #4a90e2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .speech-bubble {
+            position: absolute;
+            top: -20px;
+            right: -120px;
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 20px;
+            border: 3px solid #333;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            z-index: 3;
+            animation: bounce 2s infinite;
+        }
+
+        .speech-bubble::before {
+            content: "";
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 15px solid transparent;
+            border-right-color: #333;
+        }
+
+        .speech-bubble::after {
+            content: "";
+            position: absolute;
+            left: -9px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 12px solid transparent;
+            border-right-color: #fff;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            transform: rotate(-1deg);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            margin: 40px 0;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #333;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+            transform: rotate(-0.5deg);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "___";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* Current Obsessions */
+        .obsession-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .obsession-card {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #333;
+            transform: rotate(0.5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .obsession-card:nth-child(even) {
+            transform: rotate(-0.5deg);
+        }
+
+        .obsession-card:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .obsession-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #e74c3c;
+        }
+
+        /* Skills Lab */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .skill-badge {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #333;
+            font-weight: bold;
+            transform: rotate(-1deg);
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:nth-child(even) {
+            background: #e74c3c;
+            transform: rotate(1deg);
+        }
+
+        .skill-badge:nth-child(3n) {
+            background: #f39c12;
+        }
+
+        .skill-badge:hover {
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        /* Reading List */
+        .book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .book-item {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #333;
+            border-left: 8px solid #f39c12;
+            position: relative;
+        }
+
+        .book-item::before {
+            content: "📚";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+        }
+
+        .book-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .book-author {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .book-note {
+            font-style: italic;
+            color: #333;
+        }
+
+        /* Future Projects */
+        .project-list {
+            display: grid;
+            gap: 25px;
+        }
+
+        .project-item {
+            background: #d1ecf1;
+            padding: 25px;
+            border-radius: 20px;
+            border: 3px solid #333;
+            position: relative;
+            transform: rotate(-0.3deg);
+        }
+
+        .project-item:nth-child(even) {
+            background: #f8d7da;
+            transform: rotate(0.3deg);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .contact-section .section-title {
+            color: white;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            background: #e74c3c;
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            border: 3px solid #fff;
+            font-weight: bold;
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:nth-child(even) {
+            background: #3498db;
+            transform: rotate(2deg);
+        }
+
+        .contact-link:hover {
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .speech-bubble {
+                right: -80px;
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section {
+                margin: 20px 0;
+                padding: 25px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="profile-container">
+                <div class="profile-pic profile-real" id="profilePic">
+                    <img src="headshot2.png" alt="Graduation headshot" class="profile-img">
+
+                </div>
+                <div class="speech-bubble">
+                    Hi, I'm Matt! 👋
+                </div>
+            </div>
+            <h1 class="hero-title">Marketer & Brand Builder</h1>
+            <p class="hero-subtitle">
+                22-year-old marketer pursuing a career in full-funnel marketing and brand building. Aspiring to work with companies shaping the future.
+            </p>
+            <br>
+            <p> - BA Business Management & Marketing</p>
+            <p> Class of '25</p>
+            <p><a href="https://1drv.ms/b/c/9266c4b17b3578f8/EboUISbDpDBArdbvwUkyJ9oBmHBFyxfYBxawdNAdktb1Tw?e=1OWbI0" target="_blank"> - My CV</a></p>
+        </div>
+
+         <!-- Final Notes -->
+        <div class="section">
+            <h2 class="section-title">About Me</h2>
+            <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+                <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                    I'm an avid reader and a keen learner. Although I have finished my education I plan to continue learning and acquiring new knowledge and skills in a variety of subjects.
+                </p>
+                <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                    I have always been interested in how businesses grow, which prompted my decision to study marketing at Nottingham Trent University. I'm now eager to apply what I have learnt and to learn from people experienced in this field.
+                </p>
+                <p style="font-size: 1.1rem;">
+                    I would like to work in marketing but would not limit myself to this field for my whole career. I would like to explore different industries and roles while using marketing as a foundational skillset.</p> 
+</div>
+</div>
+
+        <!-- Current Interests -->
+        <div class="section">
+            <h2 class="section-title">Current Interests</h2>
+            <div class="obsession-grid">
+                <div class="obsession-card">
+                    <div class="obsession-title">🧠 Behavioral Science</div>
+                    <p>How cognitive biases shape decision-making and consumer behavior</p>
+                </div>
+                <div class="obsession-card">
+                    <div class="obsession-title">🤖 Coding & Computer Science</div>
+                    <p>Learning to build things with code, such as this website</p>
+                </div>
+                <div class="obsession-card">
+                    <div class="obsession-title">🚀 Marketing Science</div>
+                    <p>Understanding marketing theory and how that can be applied</p>
+                </div>
+                <div class="obsession-card">
+                    <div class="obsession-title">🧠 Philosophy, Psychology, Finance</div>
+                    <p>Broadening my knowledge of subjects by pursuing my curiosities</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Laboratory -->
+        <div class="section">
+            <h2 class="section-title">Skills Laboratory</h2>
+            <div class="skills-container">
+                <div class="skill-badge">HTML/CSS</div>
+                <div class="skill-badge">Web Design</div>
+                <div class="skill-badge">Digital Marketing</div>
+                <div class="skill-badge">Prompt Engineering</div>
+                <div class="skill-badge">SEO</div>
+                <div class="skill-badge">Data Analysis</div>
+                <div class="skill-badge">Content Creation & Editing</div>
+                <div class="skill-badge">Marketing Technology (Google Analytics, GSC)</div>
+                <div class="skill-badge">Email Marketing</div>
+               </div>
+        </div>
+
+         <!-- Knowledge stack -->
+        <div class="section">
+            <h2 class="section-title">Knowledge Fields</h2>
+            <div class="skills-container">
+                <div class="skill-badge">Market Research</div>
+                <div class="skill-badge">Consumer Behaviour</div>
+                <div class="skill-badge">Business Strategy</div>
+                <div class="skill-badge">Marketing Strategy</div>
+                <div class="skill-badge">Behavioral science Principles</div>
+                <div class="skill-badge">Marketing Communications Planning</div>
+                <div class="skill-badge">Marketing Theory</div>
+                <div class="skill-badge">Brand Theory</div>
+                <div class="skill-badge">Advertising</div>
+               </div>
+        </div>
+
+        <!-- Reading List -->
+        <div class="section">
+            <h2 class="section-title">Library (My favourite marketing books)</h2>
+            <div class="book-list">
+                <div class="book-item">
+                    <div class="book-title">Thinking, Fast and Slow</div>
+                    <div class="book-author">Daniel Kahneman</div>
+                    <div class="book-note">Game-changer for understanding decision-making biases</div>
+                </div>
+                <div class="book-item">
+                    <div class="book-title">Choice Factory</div>
+                    <div class="book-author">Richard Shotton</div>
+                    <div class="book-note">Contrarian thinking about building monopolies</div>
+                </div>
+                <div class="book-item">
+                    <div class="book-title">Alchemy</div>
+                    <div class="book-author">Rory Sutherland</div>
+                    <div class="book-note">How to validate ideas without getting lied to</div>
+                </div>
+                <div class="book-item">
+                    <div class="book-title">Hooked</div>
+                    <div class="book-author">Nir Eyal</div>
+                    <div class="book-note">Psychology behind habit-forming products</div>
+                </div>    
+                    <div class="book-item">
+                    <div class="book-title">22 Immutable Laws of Marketing</div>
+                    <div class="book-author">Al Ries & Jack Trout</div>
+                    <div class="book-note">Psychology behind habit-forming products</div>
+                </div>
+                <div class="book-item">
+                    <div class="book-title">How Brands Grow</div>
+                    <div class="book-author">Byron Sharp</div>
+                    <div class="book-note">Psychology behind habit-forming products</div>
+                </div>
+                <div class="book-item">
+                    <div class="book-title">Predictably Irrational</div>
+                    <div class="book-author">Dan Ariely</div>
+                    <div class="book-note">Psychology behind habit-forming products</div>
+                </div>
+                <div class="book-item">
+                    <div class="book-title">Cashvertising</div>
+                    <div class="book-author">Drew E. Whitman</div>
+                    <div class="book-note">Psychology behind habit-forming products</div>
+</div>
+                <div class="book-item">
+                    <div class="book-title">On Marketing Planning</div>
+                    <div class="book-author">Malcolm McDonald</div>
+                    <div class="book-note">Psychology behind habit-forming products</div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Future Projects -->
+        <div class="section">
+            <h2 class="section-title">Projects I'm working on</h2>
+            <div class="project-list">
+                <div class="project-item">
+                    <div class="project-title">This Website</div>
+                    <p>Although there are many website building platforms and AI llMs that write code, I am using this website as a project to learn how to code myself. I am also hoping that this will be a way of presenting myself differently and showcasing more about me than a standard CV and linkedin account</p>
+                </div>
+                <div class="project-item">
+                    <div class="project-title">🎓 A Student Freelance Marketplace</div>
+                    <p> Recently graduated I wish I had the opportunity to gain more freelance work alongside my degree. My aim is to utliside AI to build a platform for students to work with local businesses on a variety of freelance projects.</p>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Career Goals -->
+        <div class="section">
+            <h2 class="section-title">Career Goals</h2>
+            <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+                <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                    <strong>Phase 1:</strong> Join exciting startups, brands or behavioral science & marketing consultancies. Build real-world experience while continuing to develop technical skills.
+                </p>
+                <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                    <strong>Phase 2:</strong> Work in growth roles and branch out my skillset.
+                </p>
+                <p style="font-size: 1.1rem;">
+                    <strong>Phase 3:</strong> Launch my own startup. I have always been fascinated with entrepreneurship and would like to apply my learnings into my own company, solving problems I think are important.
+            </div>
+        </div>
+
+                </p>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="section contact-section">
+            <h2 class="section-title">Let's Build Something</h2>
+            <div class="contact-links">
+                <a href="mailto:matt.douglas1028@gmail.com" class="contact-link">Email Me</a>
+                <a href="https://www.linkedin.com/in/matt-douglas-/" class="contact-link">LinkedIn</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Static image only; no toggle behavior needed
+    </script>
+</body>
+</html>
